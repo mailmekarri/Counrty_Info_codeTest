@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <title>Code Test</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angucomplete-alt/2.4.1/angucomplete-alt.min.js"></script>
+    <style>
+      .column {
+          float: left;
+          width: 20%;
+          padding-top: 30px;
+          font-weight: bold;
+      }
+
+      .column1 {
+          float: left;
+          width: 50%;
+          padding-top: 30px;
+          font-weight: bold;
+      }
+
+      .column2 {
+          float: left;
+          width: 80%;
+          padding-top: 30px;
+      }
+      .column3 {
+          float: left;
+          width: 50%;
+          padding-top: 30px;
+      }
+      /* Clear floats after the columns */
+      .row:after {
+          content: "";
+          display: table;
+          clear: both;
+      }
+  </style>
+  </head>
+  <body>
+    <div ng-app='country_app' ng-controller='country_controller' style="padding: 100px;">
+        <div class="row">
+            <div class="column1">Enter any Country Name / Code to view Details:<span style="padding-right:50px;float:right;color:red" ng-show="error">
+                Enter Country name
+            </span></div>
+            <div class="column3">
+
+                <angucomplete-alt id="country"
+                                  placeholder="Select Country"
+                                  selected-object="selectedObj"
+                                  local-data="nationalities"
+                                  search-fields="name"
+                                  title-field="name"
+                                  minlength="1"
+                                  ng-model="country_name"
+                                  ng-keyup="clearDiv()"
+                /> </div>
+            <div class="column3" style="float:right">
+                <input type="button" value="submit" ng-click="get_info()">
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="column" ng-show="countryNametitle">Country Name:</div>
+            <div class="column2" ng-bind="countryName"></div>
+        </div>
+
+        <div class="row">
+            <div class="column" ng-show="countryNametitle">Neighbor Countries</div>
+            <div class="column2" ng-bind="neighborCountries"></div>
+        </div>
+
+        <div class="row">
+            <div class="column" ng-show="countryNametitle">Languages Spoken:</div>
+            <div class="column2" ng-bind="languagesSpoken"></div>
+        </div>
+
+        <div class="row">
+            <div class="column" ng-show="countryNametitle">Flag :</div>
+            <div class="column2" ng-show="countryNametitle"><img src="{{flagimg}}" width="200" height="150"></div>
+        </div>
+    </div>
+  </body>
+</html>
